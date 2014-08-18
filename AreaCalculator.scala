@@ -1,20 +1,19 @@
 package area
 
-import shape.Extent
+import shape._
 
-object AreaCalculator
-{
-  def findTotalArea(xs:List[AreaItem]): Double = {
+object AreaCalculator {
+  def findTotalArea(xs: List[AreaItem]): Double = {
     xs.foldLeft(0.0)((acc, elem) =>
       acc + elem.area
     )
   }
 
-  def findAverageArea(xs:List[AreaItem]): Double = {
+  def findAverageArea(xs: List[AreaItem]): Double = {
     findTotalArea(xs) / xs.length
   }
 
-  def findTotalExtent(xs:List[ExtentItem]): Extent = {
+  def findTotalExtent(xs: List[ExtentItem]): Extent = {
     val topX = xs.reduceLeft((l, r) =>
       if (l.extent().topX < r.extent().topX) l else r
     ).extent.topX
@@ -30,7 +29,7 @@ object AreaCalculator
     new Extent(topX, topY, bottomX, bottomY)
   }
 
-  def findTotalExtentArea(xs:List[ExtentItem]): Double = {
+  def findTotalExtentArea(xs: List[ExtentItem]): Double = {
     findTotalExtent(xs).area
   }
 }

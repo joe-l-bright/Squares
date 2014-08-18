@@ -19,3 +19,4 @@ project/plugins/project/
 .worksheet
 test
 scalatest_2.11-2.2.1.jar
+.idea/
