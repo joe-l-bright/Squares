@@ -14,7 +14,7 @@ object AreaCalculator
     findTotalArea(xs) / xs.length
   }
 
-  def findTotalExtentArea(xs:List[ExtentItem]): Double = {
+  def findTotalExtent(xs:List[ExtentItem]): Extent = {
     val topX = xs.reduceLeft((l, r) =>
       if (l.extent().topX < r.extent().topX) l else r
     ).extent.topX
@@ -22,13 +22,16 @@ object AreaCalculator
       if (l.extent().topY > r.extent().topY) l else r
     ).extent.topY
     val bottomX = xs.reduceLeft((l, r) =>
-      if (l.extent().bottomX < r.extent().bottomX) l else r
+      if (l.extent().bottomX > r.extent().bottomX) l else r
     ).extent.bottomX
     val bottomY = xs.reduceLeft((l, r) =>
-      if (l.extent().bottomY > r.extent().bottomY) l else r
+      if (l.extent().bottomY < r.extent().bottomY) l else r
     ).extent.bottomY
-    println(topX + " " + topY + " " + bottomX + " " + bottomY)
-    new Extent(topX, topY, bottomX, bottomY).area
+    new Extent(topX, topY, bottomX, bottomY)
+  }
+
+  def findTotalExtentArea(xs:List[ExtentItem]): Double = {
+    findTotalExtent(xs).area
   }
 }
 

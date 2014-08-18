@@ -1,13 +1,12 @@
 package shape
 
+import area._
+
 class Extent(
         var topX: Double,
         var topY: Double,
         var bottomX: Double,
-        var bottomY: Double) extends area.AreaItem
+        var bottomY: Double) extends AreaItem
 {
-  def area(): Double =
-     (bottomX - topX) * (bottomY - topY)
-  def print() = println(
-    topX + " " + topY + " " + bottomX + " " + bottomY)
+  def area(): Double = (bottomX - topX) * (topY - bottomY)
 }

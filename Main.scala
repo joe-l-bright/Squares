@@ -11,9 +11,7 @@ object Main {
     for(line <- Source fromFile("squares.txt") getLines()){
       var sqrDtl = ListBuffer[Double]()
       line split(",") map { x =>
-        println(x)
         val tmp = x.toDouble
-        println(tmp)
         sqrDtl.append(tmp)
       }
       squares += new Square(
@@ -23,11 +21,38 @@ object Main {
         sqrDtl(3)
       )
     }
-    squares.foreach(x => x.extent().print())
+
     println("Number of Squares: " + squares.length)
     println("Total Area: " + area.AreaCalculator.findTotalArea(squares.toList))
     println("Average Area: " + area.AreaCalculator.findAverageArea(squares.toList))
-    println("Total Extent: " + area.AreaCalculator.findTotalExtentArea(squares.toList))
-    println("enter a value :)")
+    println("Total Extent Area: " + area.AreaCalculator.findTotalExtentArea(squares.toList))
+
+    println()
+    for(x <- -9 to 9){
+      for(y <- -9 to 9){
+        if (squares.exists(square =>
+          x > square.extent.topX && x < square.extent.bottomX
+                && y > square.extent.bottomY && y < square.extent.topY))
+          print("X")
+        else
+          print(Math.abs(y))
+      }
+      println()
+    }
+    println()
+
+    println()
+    for(x <- -9 to 9){
+      for(y <- -9 to 9){
+        val extent = area.AreaCalculator.findTotalExtent(squares.toList)
+        if (x > extent.topX && x < extent.bottomX
+                && y > extent.bottomY && y < extent.topY)
+          print("X")
+        else
+          print(Math.abs(y))
+      }
+      println()
+    }
+    println()
   }
 }
